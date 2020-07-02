@@ -17,7 +17,7 @@ public class DemoAppApplication {
   @Bean
   public ApplicationRunner init() {
     return args -> {
-     // for test purpose
+      // for test purpose
     };
   }
 }
