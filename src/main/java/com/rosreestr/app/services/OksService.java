@@ -5,8 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.rosreestr.app.deserialize.Oks;
 import com.rosreestr.app.deserialize.OksDeserializer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 public class OksService {
   private RestService restService;
@@ -16,6 +17,7 @@ public class OksService {
   }
 
   public Oks getOks(String cadNum) {
+
     // OKS Mapper
     ObjectMapper oksMapper = new ObjectMapper();
     SimpleModule oksMapperModule = new SimpleModule();
@@ -29,6 +31,8 @@ public class OksService {
               Oks.class);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
+      log.warn(oks.toString());
+      return null;
     }
     System.out.println("deser oks " + oks);
     return oks;

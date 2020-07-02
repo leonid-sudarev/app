@@ -19,7 +19,6 @@ public class Rosreestr {
   @GetMapping("/getOks")
   ResponseEntity<Oks> get(@RequestParam("cadNum") String cadNum) {
     Oks info = oksService.getOks(cadNum);
-    // info.setStatus("Ok");
     return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
   }
 }

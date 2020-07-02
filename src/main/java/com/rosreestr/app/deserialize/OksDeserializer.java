@@ -1,7 +1,6 @@
 package com.rosreestr.app.deserialize;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -13,17 +12,28 @@ import java.io.IOException;
 public class OksDeserializer extends JsonDeserializer<Oks> {
 
   @Override
-  public Oks deserialize(JsonParser jp, DeserializationContext ctxt)
-      throws JsonProcessingException, IOException {
+  public Oks deserialize(JsonParser jp, DeserializationContext ctxt) {
     ObjectCodec oc = jp.getCodec();
-    JsonNode node = oc.readTree(jp);
-    JsonNode feature = node.get("feature");
+    JsonNode node ;
+    try {
+      node = oc.readTree(jp);
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
+    JsonNode feature = node.get("feature").get("attrs");
 
-    return new Oks(
-        feature.get("attrs").get("address").asText(),
-        feature.get("attrs").get("floors").asInt(),
-        Utils.getMeasureunit(feature.get("attrs").get("cad_unit").asInt()),
-        feature.get("attrs").get("cad_cost").asInt(),
-        feature.get("attrs").get("id").asText());
+    try {
+      Oks oks =
+          new Oks(
+              feature.get("address").asText(),
+              feature.get("floors").asInt(),
+              Utils.getMeasureunit(feature.get("cad_unit").asInt()),
+              feature.get("cad_cost").asInt(),
+              feature.get("id").asText());
+      return oks;
+    } catch (Exception e) {
+      return null;
+    }
   }
 }
