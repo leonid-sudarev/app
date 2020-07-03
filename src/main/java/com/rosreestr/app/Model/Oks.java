@@ -1,4 +1,4 @@
-package com.rosreestr.app.deserialize;
+package com.rosreestr.app.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -9,13 +9,20 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Oks implements Serializable {
+public class Oks implements Serializable, Rosr {
   String status;
   String id;
   String address;
   Integer floors;
   String cad_unit;
   Integer cad_cost;
+  // Хотел внести материал стен но нет описания что значат возвращаемые параметры.
+  // "elements_constuct": [
+  //        {
+  //          "wall": "061001005000",
+  //          "refID": 8620603
+  //        }
+  //      ],
 
   public Oks(String address, Integer floors, String cad_unit, Integer cad_cost, String id) {
     this.address = address;
