@@ -2,6 +2,7 @@ package com.rosreestr.app.controller;
 
 import com.rosreestr.app.Model.LandPlot;
 import com.rosreestr.app.Model.Oks;
+import com.rosreestr.app.Model.Status;
 import com.rosreestr.app.services.LandPlotService;
 import com.rosreestr.app.services.OksService;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +43,7 @@ public class Rosreestr {
 
   @GetMapping("/getStatus")
   ResponseEntity<String> getStatus() {
-
-    return ResponseEntity.ok("Status");
+    return ResponseEntity.ok(Status.getInstance().getStatus());
   }
 
 }
