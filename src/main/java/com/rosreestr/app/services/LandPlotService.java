@@ -17,7 +17,7 @@ public class LandPlotService {
     this.restService = restService;
   }
 
-  public LandPlot getLandPlot(String cadNum) {
+  public LandPlot getLandPlotRosreestr(String cadNum) {
     // LandPlotMapper
     ObjectMapper landPlotMapper = new ObjectMapper();
     SimpleModule landPlotModule = new SimpleModule();
@@ -36,5 +36,11 @@ public class LandPlotService {
     }
     log.debug("deser landPlotMapper " + landPlot);
     return landPlot;
+  }
+
+  public LandPlot getLandPlotApirosreestr(String cadNum) {
+    // LandPlotMapper
+    // FIXME: 7/3/20
+    return new LandPlot();
   }
 }

@@ -1,8 +1,6 @@
 package com.rosreestr.app.Model;
 
 
-
-
 public class Status {
   private static Status INSTANCE ;
 
@@ -16,57 +14,64 @@ public class Status {
   private String secondaryServerAdressOks;
   private String secondaryServerAdressLandPlot;
 
-  public String getStatus() {
-    return status;
-  }
 
-  public void setSecondaryServerAdressOks(String secondaryServerAdressOks) {
-    this.secondaryServerAdressOks = secondaryServerAdressOks;
-  }
-
-  public void setSecondaryServerAdressLandPlot(String secondaryServerAdressLandPlot) {
-    this.secondaryServerAdressLandPlot = secondaryServerAdressLandPlot;
-  }
 
   private Status() {}
 
-  public String getServerAdressOks() {
-    return serverAdressOks;
-  }
-
-  public String getServerAdressLandPlot() {
-    return serverAdressLandPlot;
-  }
 
   public static synchronized Status getInstance() {
     if (INSTANCE == null) {
       INSTANCE = new Status();
-      INSTANCE.status = "";
-      INSTANCE.serverAdressOks = INSTANCE.primaryServerAdressOks;
-      INSTANCE.serverAdressLandPlot = INSTANCE.primaryServerAdressLandPlot;
     }
     return INSTANCE;
   }
 
-  public static void updateStatusPrimaryServer(long delay, boolean isReacheble) {
+  public static void updateStatusServer(long delay, boolean isReacheble, boolean isPrimaryServer) {
     if (!isReacheble) {
-      INSTANCE.status = "Server not available";
+      if(isPrimaryServer) {
+        Server.getInstance().setPrimaryServerIsAvailable(false);
+        Server.getInstance().setPrimaryServerStatus("Server not available");
+        Server.getInstance().setMainServerInUse(false);
+        // TODO:7/3/20 check if secondary is Available and if it's unavailable then 404 and...
+        Server.getInstance().setMainServer(false);
+      }
       return;
     }
 
     if (delay > 2000) {
-      INSTANCE.status = "server to slow. We'll connect you to another one";
-      INSTANCE.serverAdressOks = INSTANCE.secondaryServerAdressOks;
-      INSTANCE.serverAdressLandPlot = INSTANCE.secondaryServerAdressLandPlot;
+      if(isPrimaryServer) {
+        Server.getInstance().setPrimaryServerIsAvailable(false);
+        Server.getInstance().setPrimaryServerStatus("Server not available");
+        // TODO:7/3/20 check if secondary is Available and if it's unavailable then 404 and...
+        Server.getInstance().setMainServer(false);
+      } else {
+        Server.getInstance().setSecondaryServerIsAvailable(false);
+        Server.getInstance().setSecondaryServerStatus("Server not available");
+        // TODO:7/3/20 check if primary is Available and if it's unavailable then 404 and...
+        Server.getInstance().setMainServer(true);
+      }
+
       return;
     }
 
     if (delay < 600) {
-      INSTANCE.status = "OK";
+      if (isPrimaryServer) {
+        Server.getInstance().setPrimaryServerStatus("Ok");
+        Server.getInstance().setPrimaryServerIsAvailable(true);
+      } else {
+        Server.getInstance().setSecondaryServerIsAvailable(true);
+        Server.getInstance().setSecondaryServerStatus("Ok");
+      }
     }
 
-    if (delay >= 600 && delay <= 2000) {
-      INSTANCE.status= "Service is slow";
+    if (delay >= 600 && delay < 2000) {
+      if (isPrimaryServer) {
+        Server.getInstance().setPrimaryServerStatus("Service is slow");
+        Server.getInstance().setPrimaryServerIsAvailable(true);
+      } else {
+        Server.getInstance().setSecondaryServerStatus("Service is slow");
+        Server.getInstance().setSecondaryServerIsAvailable(true);
+      }
     }
 
   }

@@ -20,22 +20,23 @@ public class ScheduledTasks {
   }
 
   @Scheduled(fixedRateString = "${fixed-rate.in.milliseconds}")
-  public void scheduleTaskWithCronExpression() {
+  public void scheduleTaskPrimaryServerAvailability() {
     String ip = "pkk.rosreestr.ru";
-    System.out.println(restService.getResponseTime());
+    log.info(String.valueOf(restService.getResponseTime("https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900")));
     boolean reachable = RestService.isReachable(ip, 443, 2000);
-    System.out.println(ip + " isReacheble - " + reachable);
-
-    Status.updateStatusPrimaryServer(restService.getResponseTime(),reachable);
-
+    log.info(ip + " isReacheble - " + reachable);
+    Status.updateStatusServer(
+        restService.getResponseTime("https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900"),
+        reachable,
+        true);
   }
 
   @Scheduled(cron = "${cron.expression}")
-  public void scheduleDynamicTaskWithCronExpression() {
+  public void scheduleTaskSecondaryServerAvailability() {
     log.info("Cron Dynamic Task: Current Time - {}", formatter.format(LocalDateTime.now()));
-//    String ip = "pkk.rosreestr.ru";
-//    boolean reachable = RestService.isReachable(ip, 443, 2000);
-//    System.out.println(ip + " isReacheble - " + reachable);
-//    Status.updateStatus(restService.getResponseTime(),reachable);
+    String ip = "apirosreestr.ru";
+    boolean reachable = RestService.isReachable(ip, 443, 2000);
+    log.info(ip + " isReacheble - " + reachable);
+    Status.updateStatusServer(70, reachable, false); // FIXME: 7/3/20 delay fix
   }
 }
