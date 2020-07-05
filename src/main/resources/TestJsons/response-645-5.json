@@ -1,0 +1,58 @@
+{
+  "feature": {
+    "type": 5,
+    "extent_parent": null,
+    "sort": 0,
+    "stat": {},
+    "center": {
+      "x": 4376702.461115861,
+      "y": 6727261.283122349
+    },
+    "extent": {
+      "xmin": 4376692.497559975,
+      "ymax": 6727270.566834532,
+      "xmax": 4376712.426482393,
+      "ymin": 6727251.982540076
+    },
+    "type_parent": null,
+    "attrs": {
+      "application_date": null,
+      "volume": null,
+      "area_value": 176.3,
+      "height": null,
+      "kvartal": "36:16:5500001",
+      "spread": null,
+      "address": "\u0412\u043e\u0440\u043e\u043d\u0435\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c, \u0440-\u043d \u041d\u043e\u0432\u043e\u0443\u0441\u043c\u0430\u043d\u0441\u043a\u0438\u0439, \u0441 \u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u043a\u0430, \u0443\u043b \u042e\u0431\u0438\u043b\u0435\u0439\u043d\u0430\u044f, \u0434 42",
+      "date_cost": "18.04.2018",
+      "area_unit": "055",
+      "depth": null,
+      "fp": null,
+      "area_type": "002",
+      "area_dev": null,
+      "purpose": "204002000000",
+      "elements_constuct": [
+        {
+          "wall": "061001005000",
+          "refID": 8620603
+        }
+      ],
+      "area_dev_type": null,
+      "proj_app": null,
+      "cad_unit": "383",
+      "cc_date_entering": "18.04.2018",
+      "statecd": "06",
+      "cad_cost": 3397565.45,
+      "id": "36:16:5500001:1900",
+      "area_dev_unit": null,
+      "kvartal_cn": "36:16:5500001",
+      "cc_date_approval": null,
+      "oks_type": "building",
+      "year_built": "2018",
+      "floors": "2",
+      "year_used": null,
+      "name": "\u0416\u0438\u043b\u043e\u0439 \u0434\u043e\u043c",
+      "cn": "36:16:5500001:1900",
+      "underground_floors": "-"
+    }
+  }
+}

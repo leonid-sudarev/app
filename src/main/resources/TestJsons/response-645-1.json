@@ -1,0 +1,56 @@
+{
+  "feature": {
+    "type": 1,
+    "attrs": {
+      "fp": null,
+      "sale": null,
+      "sale_dep": null,
+      "application_date": null,
+      "children": null,
+      "sale_cnt": null,
+      "parcel_type": "parcel",
+      "cn": "36:16:5500001:645",
+      "area_unit": "055",
+      "sale_doc_num": null,
+      "sale_dep_uo": null,
+      "id": "36:16:5500001:645",
+      "date_cost": "01.01.2014",
+      "rifr_dep": null,
+      "util_code": "142001010000",
+      "rifr_dep_info": null,
+      "statecd": "06",
+      "kvartal": "36:16:5500001",
+      "sale_doc_type": null,
+      "cc_date_approval": "14.12.2015",
+      "rifr": null,
+      "util_by_doc": "\u0414\u043b\u044f \u0440\u0430\u0437\u043c\u0435\u0449\u0435\u043d\u0438\u044f \u0434\u043e\u043c\u043e\u0432 \u0438\u043d\u0434\u0438\u0432\u0438\u0434\u0443\u0430\u043b\u044c\u043d\u043e\u0439 \u0436\u0438\u043b\u043e\u0439 \u0437\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438",
+      "area_type": "009",
+      "is_big": false,
+      "category_type": "003002000000",
+      "area_value": 1000.0,
+      "sale_date": null,
+      "sale_doc_date": null,
+      "cad_cost": 195750.0,
+      "address": "\u0412\u043e\u0440\u043e\u043d\u0435\u0436\u0441\u043a\u0430\u044f \u043e\u0431\u043b\u0430\u0441\u0442\u044c, \u0440-\u043d \u041d\u043e\u0432\u043e\u0443\u0441\u043c\u0430\u043d\u0441\u043a\u0438\u0439, \u0441 \u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u0440\u043e\u0432\u043a\u0430, \u0443\u043b \u042e\u0431\u0438\u043b\u0435\u0439\u043d\u0430\u044f, \u0443\u0447\u0430\u0441\u0442\u043e\u043a 42",
+      "kvartal_cn": "36:16:5500001",
+      "rifr_cnt": null,
+      "sale_price": null,
+      "cc_date_entering": "29.12.2015",
+      "cad_unit": "383"
+    },
+    "extent_parent": null,
+    "extent": {
+      "xmin": 4376663.764060174,
+      "ymin": 6727234.551490672,
+      "ymax": 6727283.644210521,
+      "xmax": 4376733.10999704
+    },
+    "stat": {},
+    "center": {
+      "x": 4376698.436948859,
+      "y": 6727259.09784463
+    },
+    "sort": 0,
+    "type_parent": null
+  }
+}

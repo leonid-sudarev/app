@@ -114,19 +114,51 @@ public class Server {
 
   @Override
   public String toString() {
-    return "Server{" +
-            "primaryServerIsAvailable=" + primaryServerIsAvailable +  "\n" +
-            ", secondaryServerIsAvailable=" + secondaryServerIsAvailable +  "\n" +
-            ", mainServerInUse=" + mainServerInUse +  "\n" +
-            ", secondaryServerInUse=" + secondaryServerInUse +  "\n" +
-            ", primaryServerStatus='" + primaryServerStatus + '\'' +  "\n" +
-            ", secondaryServerStatus='" + secondaryServerStatus + '\'' +  "\n" +
-            ", primaryAddressOks='" + primaryAddressOks + '\'' +  "\n" +
-            ", primaryAddressLandPlot='" + primaryAddressLandPlot + '\'' +  "\n" +
-            ", secondaryAddressLandPlot='" + secondaryAddressLandPlot + '\'' +  "\n" +
-            ", secondaryAddressOks='" + secondaryAddressOks + '\'' +  "\n" +
-            ", addressOks='" + addressOks + '\'' +  "\n" +
-            ", addressLandPlot='" + addressLandPlot + '\'' +  "\n" +
-            '}';
+    return "Server{"
+        + "primaryServerIsAvailable="
+        + primaryServerIsAvailable
+        + "\n"
+        + ", secondaryServerIsAvailable="
+        + secondaryServerIsAvailable
+        + "\n"
+        + ", mainServerInUse="
+        + mainServerInUse
+        + "\n"
+        + ", secondaryServerInUse="
+        + secondaryServerInUse
+        + "\n"
+        + ", primaryServerStatus='"
+        + primaryServerStatus
+        + '\''
+        + "\n"
+        + ", secondaryServerStatus='"
+        + secondaryServerStatus
+        + '\''
+        + "\n"
+        + ", primaryAddressOks='"
+        + primaryAddressOks
+        + '\''
+        + "\n"
+        + ", primaryAddressLandPlot='"
+        + primaryAddressLandPlot
+        + '\''
+        + "\n"
+        + ", secondaryAddressLandPlot='"
+        + secondaryAddressLandPlot
+        + '\''
+        + "\n"
+        + ", secondaryAddressOks='"
+        + secondaryAddressOks
+        + '\''
+        + "\n"
+        + ", addressOks='"
+        + addressOks
+        + '\''
+        + "\n"
+        + ", addressLandPlot='"
+        + addressLandPlot
+        + '\''
+        + "\n"
+        + '}';
   }
 }

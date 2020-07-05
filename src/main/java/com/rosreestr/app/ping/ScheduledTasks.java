@@ -22,7 +22,10 @@ public class ScheduledTasks {
   @Scheduled(fixedRateString = "${fixed-rate.in.milliseconds}")
   public void scheduleTaskPrimaryServerAvailability() {
     String ip = "pkk.rosreestr.ru";
-    log.info(String.valueOf(restService.getResponseTime("https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900")));
+    log.info(
+        String.valueOf(
+            restService.getResponseTime(
+                "https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900")));
     boolean reachable = RestService.isReachable(ip, 443, 2000);
     log.info(ip + " isReacheble - " + reachable);
     Status.updateStatusServer(

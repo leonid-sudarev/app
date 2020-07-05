@@ -15,7 +15,7 @@ public class OksDeserializer extends JsonDeserializer<Oks> {
   @Override
   public Oks deserialize(JsonParser jp, DeserializationContext ctxt) {
     ObjectCodec oc = jp.getCodec();
-    JsonNode node ;
+    JsonNode node;
     try {
       node = oc.readTree(jp);
     } catch (IOException e) {
@@ -25,14 +25,12 @@ public class OksDeserializer extends JsonDeserializer<Oks> {
     JsonNode feature = node.get("feature").get("attrs");
 
     try {
-      Oks oks =
-          new Oks(
-              feature.get("address").asText(),
-              feature.get("floors").asInt(),
-              Utils.getMeasureunit(feature.get("cad_unit").asInt()),
-              feature.get("cad_cost").asInt(),
-              feature.get("id").asText());
-      return oks;
+      return new Oks(
+          feature.get("address").asText(),
+          feature.get("floors").asInt(),
+          Utils.getMeasureunit(feature.get("cad_unit").asInt()),
+          feature.get("cad_cost").asInt(),
+          feature.get("id").asText());
     } catch (Exception e) {
       return null;
     }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LandPlot implements Serializable, Rosr {
+public class LandPlot implements Serializable {
   String id;
   String address;
   String cad_unit;

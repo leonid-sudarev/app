@@ -7,6 +7,7 @@ import com.rosreestr.app.Model.Oks;
 import com.rosreestr.app.deserialize.OksDeserializer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
 @Slf4j
 @Service
 public class OksService {
@@ -16,7 +17,7 @@ public class OksService {
     this.restService = restService;
   }
 
-  public Oks getOks(String cadNum) {
+  public Oks getOksRosreestr(String cadNum) {
 
     // OKS Mapper
     ObjectMapper oksMapper = new ObjectMapper();

@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 @Slf4j
-public class DaDataDeserializer extends JsonDeserializer<DaData> {
+public class DaDataSecondDeserializer extends JsonDeserializer<DaData> {
 
   @Override
   public DaData deserialize(JsonParser jp, DeserializationContext ctxt) {
@@ -24,14 +24,11 @@ public class DaDataDeserializer extends JsonDeserializer<DaData> {
       e.printStackTrace();
       return null;
     }
-
+    DaData daData = new DaData();
     try {
-      DaData daData = new DaData();
       daData.setRegion(node.get("region").asText());
       daData.setRegion_type_full(node.get("region_type_full").asText());
-      daData.setCity_with_type(node.get("city_with_type").asText());
-      daData.setStreet(node.get("street").asText());
-      daData.setHouse(node.get("house").asText());
+      daData.setResult(node.get("result").asText());
       System.out.println(daData);
       return daData;
     } catch (Exception e) {

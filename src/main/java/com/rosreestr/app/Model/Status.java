@@ -1,23 +1,9 @@
 package com.rosreestr.app.Model;
 
-
 public class Status {
-  private static Status INSTANCE ;
-
-  private String status;
-
-  private String serverAdressOks;
-  private String serverAdressLandPlot;
-  private String primaryServerAdressOks = "https://pkk.rosreestr.ru/api/features/5/";
-
-  private String primaryServerAdressLandPlot = "https://pkk.rosreestr.ru/api/features/1/";
-  private String secondaryServerAdressOks;
-  private String secondaryServerAdressLandPlot;
-
-
+  private static Status INSTANCE;
 
   private Status() {}
-
 
   public static synchronized Status getInstance() {
     if (INSTANCE == null) {
@@ -28,7 +14,7 @@ public class Status {
 
   public static void updateStatusServer(long delay, boolean isReacheble, boolean isPrimaryServer) {
     if (!isReacheble) {
-      if(isPrimaryServer) {
+      if (isPrimaryServer) {
         Server.getInstance().setPrimaryServerIsAvailable(false);
         Server.getInstance().setPrimaryServerStatus("Server not available");
         Server.getInstance().setMainServerInUse(false);
@@ -39,7 +25,7 @@ public class Status {
     }
 
     if (delay > 2000) {
-      if(isPrimaryServer) {
+      if (isPrimaryServer) {
         Server.getInstance().setPrimaryServerIsAvailable(false);
         Server.getInstance().setPrimaryServerStatus("Server not available");
         // TODO:7/3/20 check if secondary is Available and if it's unavailable then 404 and...
@@ -73,6 +59,5 @@ public class Status {
         Server.getInstance().setSecondaryServerIsAvailable(true);
       }
     }
-
   }
 }

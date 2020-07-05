@@ -15,15 +15,21 @@ public class DaData implements Serializable {
   String city_with_type;
   String street;
   String house;
+  String result;
+
+  //  @Override
+  //  public String toString() {
+  //    final StringBuffer sb = new StringBuffer();
+  //    sb.append(region).append(' ');
+  //    sb.append(region_type_full).append(", ");
+  //    sb.append(city_with_type).append(", ");
+  //    sb.append(street).append(", ");
+  //    sb.append(house);
+  //    return sb.toString();
+  //  }
 
   @Override
   public String toString() {
-    final StringBuffer sb = new StringBuffer();
-    sb.append(region).append(' ');
-    sb.append(region_type_full).append(", ");
-    sb.append(city_with_type).append(", ");
-    sb.append(street).append(", ");
-    sb.append(house);
-    return sb.toString();
+    return result;
   }
 }

@@ -9,15 +9,14 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Oks implements Serializable, Rosr {
-  String status;
+public class Oks implements Serializable {
   String id;
   String address;
   Integer floors;
   String cad_unit;
   Integer cad_cost;
   // Хотел внести материал стен но нет описания что значат возвращаемые параметры.
-  // "elements_constuct": [
+  // "elements_construct": [
   //        {
   //          "wall": "061001005000",
   //          "refID": 8620603
