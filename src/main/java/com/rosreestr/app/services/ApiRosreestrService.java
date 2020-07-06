@@ -10,9 +10,9 @@ import com.rosreestr.app.Serealize.Out;
 import com.rosreestr.app.deserialize.ApiRosreestrDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.profiler.Profiler;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,22 +31,23 @@ public class ApiRosreestrService {
     module.addDeserializer(ApiRosreestr.class, new ApiRosreestrDeserializer());
     mapper.registerModule(module);
 
-    // test files
-    File apiros = new File("src/main/resources/response-apiros.json");
-    File apirosreestrFound0 = new File("src/main/resources/response-apirosreestr-found0.json");
-
+    Profiler delayProfiler = new Profiler("DELAY_PROFILER_GET_API_ROSREESTR");
+    delayProfiler.start("daDataService.nomalizedAddress");
     String nomalizedAddress = daDataService.nomalizedAddress(address);
+    delayProfiler.start("restService.createPostApiRosreestr");
     String postApiRosreestr = restService.createPostApiRosreestr(nomalizedAddress);
+
     System.out.println(postApiRosreestr);
 
     ApiRosreestr readValue;
+    delayProfiler.start("mapper.readValue(postApiRosreestr, ApiRosreestr.class)");
     try {
       readValue = mapper.readValue(postApiRosreestr, ApiRosreestr.class);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
       return null;
     }
-
+    delayProfiler.stop().print();
     System.out.println("deser ApiRosreestr " + (readValue));
     return readValue;
   }
