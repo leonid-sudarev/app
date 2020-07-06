@@ -88,7 +88,8 @@ public class RestService {
   public String createPostApiRosreestr(String address) {
     String url = "https://apirosreestr.ru/api/cadaster/search";
     String headerTokenName = "Token";
-    String headerTokenValue = "${apirosreestr.Token}";
+//    String headerTokenValue = "${apirosreestr.Token}";
+    String headerTokenValue = "2HJQ-SA2P-RB0D-KUQD";
     // create headers
     HttpHeaders headers = new HttpHeaders();
     headers.add(headerTokenName, headerTokenValue);
