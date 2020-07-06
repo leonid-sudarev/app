@@ -10,11 +10,14 @@ import com.rosreestr.app.services.DaDataService;
 import com.rosreestr.app.services.LandPlotService;
 import com.rosreestr.app.services.OksService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.profiler.Profiler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 public class Rosreestr {
@@ -69,16 +72,13 @@ public class Rosreestr {
     //      info = null;
     //    }
     ApiRosreestr info;
+    Profiler delayProfiler = new Profiler("DELAY_PROFILER_GET_BY_ADDRESS");
+    delayProfiler.start("apiRosreestrService.getApiRosreestr");
     info = apiRosreestrService.getApiRosreestr(address);
-    //    try{
-    //
-    //    } catch (ConnectException e) {
-    //      // закончились запросы на apirosreestr(((
-    //      return ResponseEntity.badRequest().eTag("No free queries for apirosreestr(((").build();
-    //    }
-
-    info.getObjectsList().forEach(System.out::println);
+    delayProfiler.start("apiRosreestrService.getOksByCadnumbers");
     Out out = apiRosreestrService.getOksByCadnumbers(info);
+    delayProfiler.stop().print();
+
     return out != null ? ResponseEntity.ok(out) : ResponseEntity.notFound().build();
   }
 
