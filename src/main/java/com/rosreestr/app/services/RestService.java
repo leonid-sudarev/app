@@ -59,12 +59,12 @@ public class RestService {
 
     String headerAuthName = "Authorization";
 
-//    String headerAuthValue = "${daData.Auth}";
-    String headerAuthValue = "Token c7b88c7d1cee9a3f4deeced17a4197bebc2d3031";
+    //    String headerAuthValue = "${daData.Auth}";
+    String headerAuthValue = "Token a095526f58dcbefa7e5a3d5ebff9425873c23900";
 
     String headerXSecretName = "X-Secret";
-//    String headerXSecretValue = "${daData.XSecret}";
-    String headerXSecretValue = "a090e73aba767131c1395563d8746a4fb527b449";
+    //    String headerXSecretValue = "${daData.XSecret}";
+    String headerXSecretValue = "0ae9c05383f50097832dedb26528bc7d52a71b23";
 
     System.out.println(headerXSecretValue);
     System.out.println(headerAuthValue);
@@ -88,7 +88,7 @@ public class RestService {
   public String createPostApiRosreestr(String address) {
     String url = "https://apirosreestr.ru/api/cadaster/search";
     String headerTokenName = "Token";
-//    String headerTokenValue = "${apirosreestr.Token}";
+    //    String headerTokenValue = "${apirosreestr.Token}";
     String headerTokenValue = "2HJQ-SA2P-RB0D-KUQD";
     // create headers
     HttpHeaders headers = new HttpHeaders();

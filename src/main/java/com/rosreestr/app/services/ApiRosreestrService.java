@@ -32,10 +32,10 @@ public class ApiRosreestrService {
     mapper.registerModule(module);
 
     Profiler delayProfiler = new Profiler("DELAY_PROFILER_GET_API_ROSREESTR");
-    delayProfiler.start("daDataService.nomalizedAddress");
-    String nomalizedAddress = daDataService.nomalizedAddress(address);
+    delayProfiler.start("daDataService.normalizedAddress");
+    String normalizedAddress = daDataService.nomalizedAddress(address);
     delayProfiler.start("restService.createPostApiRosreestr");
-    String postApiRosreestr = restService.createPostApiRosreestr(nomalizedAddress);
+    String postApiRosreestr = restService.createPostApiRosreestr(normalizedAddress);
 
     System.out.println(postApiRosreestr);
 
