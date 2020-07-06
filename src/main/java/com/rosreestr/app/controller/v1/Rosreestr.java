@@ -28,7 +28,17 @@ public class Rosreestr {
 
   @GetMapping("api/v1/getOks")
   ResponseEntity<Oks> getOks(@RequestParam("cadNum") String cadNum) {
-    Oks info = oksService.getOksRosreestr(cadNum);
+    Oks info;
+    if (Server.getInstance().getMainServerInUse()) {
+      info = oksService.getOksRosreestr(cadNum);
+    } else if (Server.getInstance().getSecondaryServerInUse()) {
+      // info = //ask for  2ry server API
+
+      info = null;
+    } else {
+      info = null;
+    }
+
     return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
   }
 

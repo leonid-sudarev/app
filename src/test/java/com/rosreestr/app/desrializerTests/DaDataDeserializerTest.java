@@ -31,7 +31,6 @@ public class DaDataDeserializerTest {
     DaData[] readValue = mapper.readValue(okValue, DaData[].class);
     System.out.println(readValue[0]);
     assertThat(readValue[0], notNullValue());
-    assertThat(readValue[0].getResult(),is("г Воронеж, пр-кт Революции, д 84"));
+    assertThat(readValue[0].getResult(), is("г Воронеж, пр-кт Революции, д 84"));
   }
-
 }

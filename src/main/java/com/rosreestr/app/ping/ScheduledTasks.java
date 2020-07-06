@@ -20,6 +20,7 @@ public class ScheduledTasks {
   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
   private RestService restService;
   volatile long delay;
+
   public ScheduledTasks(RestService restService) {
     this.restService = restService;
   }
@@ -46,11 +47,11 @@ public class ScheduledTasks {
     boolean reachable = RestService.isReachable(url, 443, 2000);
     log.info(url + " isReacheble - " + reachable);
     delay = delay(url);
-    log.info("Delay cron "+ url,delay);
+    log.info("Delay cron " + url, delay);
     Status.updateStatusServer(delay, reachable, false);
   }
 
-  private long delay(String url){
+  private long delay(String url) {
     // in case of Linux change the 'n'(Mac) to 'c'(Linux)
     Process p1 = null;
     try {
@@ -72,14 +73,12 @@ public class ScheduledTasks {
     }
     System.out.println(list);
     System.out.println(list.get(1));
-    try{
+    try {
       String split = list.get(1).split("time=")[1];
       System.out.println(split);
       return (long) Double.parseDouble(split.substring(0, split.length() - 3));
     } catch (ArrayIndexOutOfBoundsException e) {
       return 3000;
     }
-
-
   }
 }
