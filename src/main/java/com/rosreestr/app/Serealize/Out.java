@@ -11,6 +11,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Out implements Serializable {
-  private List<Oks> oksList0;
+  private List<Oks> oksList;
   private List<LandPlot> landPlotList;
 }
