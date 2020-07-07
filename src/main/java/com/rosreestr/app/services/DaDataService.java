@@ -18,7 +18,7 @@ public class DaDataService {
     this.restService = restService;
   }
 
-  public String nomalizedAddress(String address) {
+  public String getNormalizedAddress(String address) {
     ObjectMapper mapper = new ObjectMapper();
     SimpleModule module = new SimpleModule();
     module.addDeserializer(DaData.class, new DaDataSecondDeserializer());

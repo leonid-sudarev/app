@@ -12,6 +12,14 @@ import java.io.Serializable;
 public class Objects implements Serializable {
   String ADDRESS;
   String CADNOMER;
+  String TYPE;
+  String AREA;
+
+  public Objects(String ADDRESS, String CADNOMER, String AREA) {
+    this.ADDRESS = ADDRESS;
+    this.CADNOMER = CADNOMER;
+    this.AREA = AREA;
+  }
 
   public Objects(String ADDRESS, String CADNOMER) {
     this.ADDRESS = ADDRESS;

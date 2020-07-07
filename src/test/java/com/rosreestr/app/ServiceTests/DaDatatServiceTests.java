@@ -25,7 +25,7 @@ public class DaDatatServiceTests {
   @Test
   public void ShouldReturnValidObject() {
     String body = " \" Варонеж, Ревалюции,84\" ";
-    String response = daDataService.nomalizedAddress(body);
+    String response = daDataService.getNormalizedAddress(body);
     assertThat(response, notNullValue());
     assertThat(response, is("г Воронеж, пр-кт Революции, д 84"));
   }

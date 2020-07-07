@@ -38,7 +38,10 @@ public class ApiRosreestrDeserializer extends JsonDeserializer<ApiRosreestr> {
       for (int i = 0; i < found; i++) {
         JsonNode objects = node.get("objects").get(i);
         objectsList.add(
-            new Objects(objects.get("ADDRESS").asText(), objects.get("CADNOMER").asText()));
+            new Objects(
+                objects.get("ADDRESS").asText(),
+                objects.get("CADNOMER").asText(),
+                objects.get("AREA").asText()));
       }
       return new ApiRosreestr(found, objectsList);
     } catch (Exception e) {

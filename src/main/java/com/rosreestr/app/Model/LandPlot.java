@@ -14,6 +14,7 @@ public class LandPlot implements Serializable {
   String address;
   String cad_unit;
   Integer cad_cost;
+  String AdditionalInformation;
 
   public LandPlot(String id, String address, String cad_unit, Integer cad_cost) {
     this.id = id;

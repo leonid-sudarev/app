@@ -33,6 +33,8 @@ public class ScheduledTasks {
             restService.getResponseTime(
                 "https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900")));
     boolean reachable = RestService.isReachable(ip, 443, 2000);
+    // Make Rosreestr unavailable. for test purpose
+    //    reachable=false;
     log.info(ip + " isReacheble - " + reachable);
     Status.updateStatusServer(
         restService.getResponseTime("https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900"),
@@ -40,7 +42,8 @@ public class ScheduledTasks {
         true);
   }
 
-  @Scheduled(cron = "${cron.expression}")
+  @Scheduled(initialDelay = 2000, fixedRateString = "${fixed-rate.in.milliseconds}")
+//  @Scheduled(cron = "${cron.expression}") // не срабатывает при запуске
   public void scheduleTaskSecondaryServerAvailability() {
     log.info("Cron Dynamic Task: Current Time - {}", formatter.format(LocalDateTime.now()));
     String url = "apirosreestr.ru";
@@ -71,11 +74,8 @@ public class ScheduledTasks {
       }
       list.add(s);
     }
-    System.out.println(list);
-    System.out.println(list.get(1));
     try {
       String split = list.get(1).split("time=")[1];
-      System.out.println(split);
       return (long) Double.parseDouble(split.substring(0, split.length() - 3));
     } catch (ArrayIndexOutOfBoundsException e) {
       return 3000;

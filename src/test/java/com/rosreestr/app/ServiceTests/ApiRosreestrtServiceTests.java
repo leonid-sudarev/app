@@ -33,4 +33,5 @@ public class ApiRosreestrtServiceTests {
     assertThat(response.getFound(), is(4));
     assertThat(response.getObjectsList().size(), is(4));
   }
+
 }
