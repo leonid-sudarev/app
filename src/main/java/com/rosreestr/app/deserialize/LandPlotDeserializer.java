@@ -9,7 +9,7 @@ import com.rosreestr.app.Model.LandPlot;
 import com.rosreestr.app.Utils.Utils;
 
 import java.io.IOException;
-
+//см. ApiRosreestrDeserializer
 public class LandPlotDeserializer extends JsonDeserializer<LandPlot> {
 
   @Override
@@ -27,7 +27,7 @@ public class LandPlotDeserializer extends JsonDeserializer<LandPlot> {
       return new LandPlot(
           featureAttrs.get("attrs").get("id").asText(),
           featureAttrs.get("attrs").get("address").asText(),
-          Utils.getMeasureunit(featureAttrs.get("attrs").get("cad_unit").asInt()),
+          Utils.getMeasureUnitFromIntValue(featureAttrs.get("attrs").get("cad_unit").asInt()),
           featureAttrs.get("attrs").get("cad_cost").asInt());
     } catch (Exception e) {
       return null;

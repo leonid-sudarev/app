@@ -11,14 +11,13 @@ public class Status {
     }
     return INSTANCE;
   }
-
+// логика вывода серверов из работы
   public static void updateStatusServer(long delay, boolean isReacheble, boolean isPrimaryServer) {
     if (!isReacheble) {
       if (isPrimaryServer) {
         Server.getInstance().setPrimaryServerIsAvailable(false);
         Server.getInstance().setPrimaryServerStatus("Server not available");
         Server.getInstance().setMainServerInUse(false);
-        // TODO:7/3/20 check if secondary is Available and if it's unavailable then 404 and...
         Server.getInstance().setMainServer(false);
       }
       return;
@@ -28,15 +27,12 @@ public class Status {
       if (isPrimaryServer) {
         Server.getInstance().setPrimaryServerIsAvailable(false);
         Server.getInstance().setPrimaryServerStatus("Server not available");
-        // TODO:7/3/20 check if secondary is Available and if it's unavailable then 404 and...
         Server.getInstance().setMainServer(false);
       } else {
         Server.getInstance().setSecondaryServerIsAvailable(false);
         Server.getInstance().setSecondaryServerStatus("Server not available");
-        // TODO:7/3/20 check if primary is Available and if it's unavailable then 404 and...
         Server.getInstance().setMainServer(true);
       }
-
       return;
     }
 

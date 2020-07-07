@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+//кастомный десериалайзер для того чтобы из полученного JSON получить необходимые поля
 @Slf4j
 public class ApiRosreestrDeserializer extends JsonDeserializer<ApiRosreestr> {
 
@@ -30,11 +30,13 @@ public class ApiRosreestrDeserializer extends JsonDeserializer<ApiRosreestr> {
     }
     List<Objects> objectsList = new ArrayList<>();
 
+    //node.get для навигации по
     try {
       int found = node.get("found").asInt(0);
       if (found == 0) {
         return null;
       }
+      //формирование списка объектов
       for (int i = 0; i < found; i++) {
         JsonNode objects = node.get("objects").get(i);
         objectsList.add(

@@ -28,7 +28,7 @@ public class OksDeserializer extends JsonDeserializer<Oks> {
       return new Oks(
           feature.get("address").asText(),
           feature.get("floors").asInt(),
-          Utils.getMeasureunit(feature.get("cad_unit").asInt()),
+          Utils.getMeasureUnitFromIntValue(feature.get("cad_unit").asInt()), // преобразует коды в единицы измерения
           feature.get("cad_cost").asInt(),
           feature.get("id").asText());
     } catch (Exception e) {

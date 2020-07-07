@@ -1,11 +1,14 @@
 package com.rosreestr.app.services;
 
+import com.rosreestr.app.Model.Greeting;
+import com.rosreestr.app.Model.Server;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,11 +17,16 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.time.Duration;
 import java.util.Collections;
-import java.util.Set;
 
 @Slf4j
 @Service
 public class RestService {
+  private SimpMessagingTemplate template;
+
+@Autowired
+  public void setTemplate(SimpMessagingTemplate template) {
+    this.template = template;
+  }
 
   private final RestTemplate restTemplate;
 
@@ -43,6 +51,9 @@ public class RestService {
   }
 
   public String getPlainJson(String url) {
+    template.convertAndSend(
+        "/topic/greetings", new Greeting(Server.getInstance().toString())); // FIXME: 7/7/20 
+
     return this.restTemplate.getForObject(url, String.class);
   }
 
@@ -58,16 +69,11 @@ public class RestService {
     String url = "https://cleaner.dadata.ru/api/v1/clean/address";
 
     String headerAuthName = "Authorization";
-
-    //    String headerAuthValue = "${daData.Auth}";
     String headerAuthValue = "Token a095526f58dcbefa7e5a3d5ebff9425873c23900";
 
     String headerXSecretName = "X-Secret";
-    //    String headerXSecretValue = "${daData.XSecret}";
     String headerXSecretValue = "0ae9c05383f50097832dedb26528bc7d52a71b23";
 
-    System.out.println(headerXSecretValue);
-    System.out.println(headerAuthValue);
     // create headers
     HttpHeaders headers = new HttpHeaders();
     headers.add(headerAuthName, headerAuthValue);
@@ -88,7 +94,6 @@ public class RestService {
   public String createPostApiRosreestr(String address) {
     String url = "https://apirosreestr.ru/api/cadaster/search";
     String headerTokenName = "Token";
-    //    String headerTokenValue = "${apirosreestr.Token}";
     String headerTokenValue = "2HJQ-SA2P-RB0D-KUQD";
     // create headers
     HttpHeaders headers = new HttpHeaders();
@@ -109,11 +114,4 @@ public class RestService {
     return restTemplate.postForObject(url, entity, String.class);
   }
 
-  public Set<HttpMethod> allowedOperations() {
-    String url = "https://jsonplaceholder.typicode.com/posts";
-    String url2 = "https://apirosreestr.ru/";
-    String url3 = "https://cleaner.dadata.ru/";
-    // send HEAD request
-    return this.restTemplate.optionsForAllow(url3);
-  }
 }

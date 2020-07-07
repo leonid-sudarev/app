@@ -1,26 +1,28 @@
 package com.rosreestr.app.Model;
 
-public class Server {
+import java.io.Serializable;
+
+public class Server implements Serializable {
   private static Server INSTANCE;
 
   private Boolean primaryServerIsAvailable;
   private Boolean secondaryServerIsAvailable;
 
-  private Boolean mainServerInUse;
-  private Boolean secondaryServerInUse;
+  private transient Boolean mainServerInUse;
+  private transient Boolean secondaryServerInUse;
 
-  private String primaryServerStatus;
+  private transient String primaryServerStatus;
 
-  private String secondaryServerStatus;
-  private String primaryAddressOks;
+  private transient String secondaryServerStatus;
+  private transient String primaryAddressOks;
 
-  private String primaryAddressLandPlot;
-  private String secondaryAddressLandPlot;
+  private transient String primaryAddressLandPlot;
+  private transient String secondaryAddressLandPlot;
 
-  private String secondaryAddressOks;
-  private String addressOks;
+  private transient String secondaryAddressOks;
+  private transient String addressOks;
 
-  private String addressLandPlot;
+  private transient String addressLandPlot;
 
   public static synchronized Server getInstance() {
     if (INSTANCE == null) {

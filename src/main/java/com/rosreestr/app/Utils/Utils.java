@@ -1,7 +1,7 @@
 package com.rosreestr.app.Utils;
 
 public class Utils {
-  public static String getMeasureunit(int i) {
+  public static String getMeasureUnitFromIntValue(int i) {
     switch (i) {
       case 3:
         return "мм";

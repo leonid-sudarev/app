@@ -9,7 +9,8 @@ import com.rosreestr.app.Model.DaData;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-
+//см. ApiRosreestrDeserializer
+//будет нужен в случае отказа от Апиросрееста
 @Slf4j
 public class DaDataSecondDeserializer extends JsonDeserializer<DaData> {
 

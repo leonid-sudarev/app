@@ -9,7 +9,7 @@ import com.rosreestr.app.Model.DaData;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-
+//см. ApiRosreestrDeserializer
 @Slf4j
 public class DaDataDeserializer extends JsonDeserializer<DaData> {
 

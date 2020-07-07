@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
+//Объект в который сериализуется запрос по адресу
 @Data
 @NoArgsConstructor
 public class Out implements Serializable {

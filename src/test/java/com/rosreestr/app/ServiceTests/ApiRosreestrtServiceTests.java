@@ -30,8 +30,8 @@ public class ApiRosreestrtServiceTests {
     System.out.println(response);
     assertThat(response, notNullValue());
     assertThat(response.getObjectsList(), notNullValue());
-    assertThat(response.getFound(), is(4));
-    assertThat(response.getObjectsList().size(), is(4));
+    assertThat(response.getFound(), is(5));
+    assertThat(response.getObjectsList().size(), is(5));
   }
 
 }
