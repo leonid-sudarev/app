@@ -34,7 +34,7 @@ public class ScheduledTasks {
                 "https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900")));
     boolean reachable = RestService.isReachable(ip, 443, 2000);
     // Make Rosreestr unavailable. for test purpose
-        reachable=false;
+//        reachable=false;
     log.info(ip + " isReacheble - " + reachable);
     Status.updateStatusServer(
         restService.getResponseTime("https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900"),
@@ -49,7 +49,7 @@ public class ScheduledTasks {
     String url = "apirosreestr.ru";
     boolean reachable = RestService.isReachable(url, 443, 2000);
     // Make Rosreestr unavailable. for test purpose
-                reachable=false;
+//                reachable=false;
     log.info(url + " isReacheble - " + reachable);
     delay = delay(url);
     Status.updateStatusServer(delay, reachable, false);
