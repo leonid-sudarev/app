@@ -1,6 +1,6 @@
 package com.rosreestr.app.ping;
 
-import com.rosreestr.app.Model.Status;
+import com.rosreestr.app.model.Status;
 import com.rosreestr.app.services.RestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,7 +18,7 @@ import java.util.List;
 @Component
 public class ScheduledTasks {
   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-  private RestService restService;
+  private final RestService restService;
   volatile long delay;
 
   public ScheduledTasks(RestService restService) {
@@ -34,7 +34,7 @@ public class ScheduledTasks {
                 "https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900")));
     boolean reachable = RestService.isReachable(ip, 443, 2000);
     // Make Rosreestr unavailable. for test purpose
-    //    reachable=false;
+        reachable=false;
     log.info(ip + " isReacheble - " + reachable);
     Status.updateStatusServer(
         restService.getResponseTime("https://pkk.rosreestr.ru/api/features/5/36:16:5500001:1900"),
@@ -43,14 +43,15 @@ public class ScheduledTasks {
   }
 
   @Scheduled(initialDelay = 2000, fixedRateString = "${fixed-rate.in.milliseconds}")
-//  @Scheduled(cron = "${cron.expression}") // не срабатывает при запуске
+  //  @Scheduled(cron = "${cron.expression}") // не срабатывает при запуске
   public void scheduleTaskSecondaryServerAvailability() {
     log.info("Cron Dynamic Task: Current Time - {}", formatter.format(LocalDateTime.now()));
     String url = "apirosreestr.ru";
     boolean reachable = RestService.isReachable(url, 443, 2000);
+    // Make Rosreestr unavailable. for test purpose
+                reachable=false;
     log.info(url + " isReacheble - " + reachable);
     delay = delay(url);
-    log.info("Delay cron " + url, delay);
     Status.updateStatusServer(delay, reachable, false);
   }
 

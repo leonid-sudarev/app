@@ -1,4 +1,4 @@
-package com.rosreestr.app.Model;
+package com.rosreestr.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -14,7 +14,7 @@ public class LandPlot implements Serializable {
   String address;
   String cad_unit;
   Integer cad_cost;
-  String AdditionalInformation;
+  String additionalInformation;
 
   public LandPlot(String id, String address, String cad_unit, Integer cad_cost) {
     this.id = id;

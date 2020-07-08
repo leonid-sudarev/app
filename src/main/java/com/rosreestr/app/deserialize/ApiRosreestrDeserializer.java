@@ -5,8 +5,8 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.rosreestr.app.Model.ApiRosreestr;
-import com.rosreestr.app.Model.Objects;
+import com.rosreestr.app.model.ApiRosreestr;
+import com.rosreestr.app.model.Objects;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -24,7 +24,6 @@ public class ApiRosreestrDeserializer extends JsonDeserializer<ApiRosreestr> {
       node = oc.readTree(jp);
       log.info(node.toString());
     } catch (IOException e) {
-      e.printStackTrace();
       log.error("IOException oc.readTree(jp)");
       return null;
     }

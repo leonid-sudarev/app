@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.rosreestr.app.Model.DaData;
+import com.rosreestr.app.model.DaData;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class DaDataSecondDeserializer extends JsonDeserializer<DaData> {
       node = oc.readTree(jp);
       log.info(node.toString());
     } catch (IOException e) {
-      e.printStackTrace();
+      log.error(e.getMessage());
       return null;
     }
     DaData daData = new DaData();
@@ -33,8 +33,7 @@ public class DaDataSecondDeserializer extends JsonDeserializer<DaData> {
       System.out.println(daData);
       return daData;
     } catch (Exception e) {
-      e.printStackTrace();
-      log.warn("noData-NPE");
+      log.error("noData-NPE" +e.getMessage());
       return null;
     }
   }

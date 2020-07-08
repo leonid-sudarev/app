@@ -1,14 +1,10 @@
 package com.rosreestr.app.services;
 
-import com.rosreestr.app.Model.Greeting;
-import com.rosreestr.app.Model.Server;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,12 +17,6 @@ import java.util.Collections;
 @Slf4j
 @Service
 public class RestService {
-  private SimpMessagingTemplate template;
-
-@Autowired
-  public void setTemplate(SimpMessagingTemplate template) {
-    this.template = template;
-  }
 
   private final RestTemplate restTemplate;
 
@@ -51,9 +41,6 @@ public class RestService {
   }
 
   public String getPlainJson(String url) {
-    template.convertAndSend(
-        "/topic/greetings", new Greeting(Server.getInstance().toString())); // FIXME: 7/7/20 
-
     return this.restTemplate.getForObject(url, String.class);
   }
 

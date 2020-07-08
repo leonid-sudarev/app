@@ -5,8 +5,8 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.rosreestr.app.Model.Oks;
-import com.rosreestr.app.Utils.Utils;
+import com.rosreestr.app.model.Oks;
+import com.rosreestr.app.utils.Utils;
 
 import java.io.IOException;
 
@@ -19,7 +19,6 @@ public class OksDeserializer extends JsonDeserializer<Oks> {
     try {
       node = oc.readTree(jp);
     } catch (IOException e) {
-      e.printStackTrace();
       return null;
     }
     JsonNode feature = node.get("feature").get("attrs");

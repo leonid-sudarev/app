@@ -1,4 +1,4 @@
-package com.rosreestr.app.Model;
+package com.rosreestr.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class Oks implements Serializable {
   Integer floors;
   String cad_unit;
   Integer cad_cost;
-  String AdditionalInformation;
+  String additionalInformation;
 
   public Oks(String address, Integer floors, String cad_unit, Integer cad_cost, String id) {
     this.address = address;

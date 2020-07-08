@@ -1,4 +1,4 @@
-package com.rosreestr.app.Model;
+package com.rosreestr.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiRosreestr implements Serializable {
   int found;
-  List<Objects> objectsList;
+  private List<Objects> objectsList;
 
   public ApiRosreestr(int found, List<Objects> objectsList) {
     this.found = found;

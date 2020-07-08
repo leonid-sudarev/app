@@ -1,6 +1,6 @@
 package com.rosreestr.app.ServiceTests;
 
-import com.rosreestr.app.Model.Oks;
+import com.rosreestr.app.model.Oks;
 import com.rosreestr.app.services.OksService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

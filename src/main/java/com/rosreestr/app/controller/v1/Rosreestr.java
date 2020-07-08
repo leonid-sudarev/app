@@ -1,10 +1,10 @@
 package com.rosreestr.app.controller.v1;
 
-import com.rosreestr.app.Model.ApiRosreestr;
-import com.rosreestr.app.Model.LandPlot;
-import com.rosreestr.app.Model.Oks;
-import com.rosreestr.app.Model.Server;
-import com.rosreestr.app.Serealize.Out;
+import com.rosreestr.app.model.ApiRosreestr;
+import com.rosreestr.app.model.LandPlot;
+import com.rosreestr.app.model.Oks;
+import com.rosreestr.app.model.Server;
+import com.rosreestr.app.serialize.Out;
 import com.rosreestr.app.services.ApiRosreestrService;
 import com.rosreestr.app.services.DaDataService;
 import com.rosreestr.app.services.LandPlotService;
@@ -29,37 +29,40 @@ public class Rosreestr {
 
   /**
    * Метод получающий данные объекта по кадастровому номеру
+   *
    * @param cadNum кадастровый номер объекта
    * @return "id": "address": "cad_unit": "cad_cost": "additionalInformation": "floors":
    */
   @GetMapping("api/v1/getOks")
   ResponseEntity<Oks> getOks(@RequestParam("cadNum") String cadNum) {
     Oks info;
-    if (Server.getInstance().getMainServerInUse()) {
+
+    if (isPrimaryServerWorks()) {
       log.info("MainServerInUse");
       info = oksService.getOksRosreestr(cadNum);
-    } else if (Server.getInstance().getSecondaryServerInUse()
-        && !Server.getInstance().getPrimaryServerIsAvailable()) {
-      log.info("SecondaryServerInUse");
-      info = apiRosreestrService.getOks(cadNum);
     } else {
-      info = null;
+      if (isSecondaryServerWorks()) {
+        log.info("SecondaryServerInUse");
+        info = apiRosreestrService.getOks(cadNum);
+      } else {
+        info = null;
+      }
     }
     return info != null ? ResponseEntity.ok(info) : ResponseEntity.notFound().build();
   }
 
   /**
    * Метод получающий данные земельного участока по кадастровому номеру
+   *
    * @param cadNum кадастровый номер участка
    * @return "id": "address": "cad_unit": "cad_cost": "additionalInformation":
    */
   @GetMapping("api/v1/getPlot")
   ResponseEntity<LandPlot> getPlot(@RequestParam("cadNum") String cadNum) {
     LandPlot info;
-    if (Server.getInstance().getMainServerInUse()) {
+    if (isPrimaryServerWorks()) {
       info = landPlotService.getLandPlotRosreestr(cadNum);
-    } else if (Server.getInstance().getSecondaryServerInUse()
-        && !Server.getInstance().getMainServerInUse()) {
+    } else if (isSecondaryServerWorks()) {
       info = apiRosreestrService.getLandplot(cadNum);
     } else {
       info = null;
@@ -69,6 +72,7 @@ public class Rosreestr {
 
   /**
    * Запрос к серверу нормализации данных
+   *
    * @param address адрес который может содержать ошибки, очепятки пользователя, неполную информацию
    * @return строка нормализованных данных
    */
@@ -83,34 +87,47 @@ public class Rosreestr {
    * Метод для поиска объектов/участко по указанному адресу
    *
    * @param address адрес который может содержать ошибки, очепятки пользователя, неполную информацию
-   * @return
-   * Лист участков и лист объектов которые были найдены по данному адресу
+   * @return Лист участков и лист объектов которые были найдены по данному адресу
    */
-
   @GetMapping("api/v1/getByAddress")
   ResponseEntity<Out> getByAddress(@RequestParam("address") String address) {
     ApiRosreestr info;
-    // delayProfiler для мониторинга задержек между сервисами
-    Profiler delayProfiler = new Profiler("DELAY_PROFILER_GET_BY_ADDRESS");
-    delayProfiler.start("apiRosreestrService.getApiRosreestr");
-    //нормализация адреса и получение кадастровых номеров по адресу
-    info = apiRosreestrService.getApiRosreestr(address);
+    Out out;
+    if (Server.getInstance().getSecondaryServerIsAvailable()){
+      // delayProfiler для мониторинга задержек между сервисами
+      Profiler delayProfiler = new Profiler("DELAY_PROFILER_GET_BY_ADDRESS");
+      delayProfiler.start("apiRosreestrService.getApiRosreestr");
+      // нормализация адреса и получение кадастровых номеров по адресу
+      info = apiRosreestrService.getApiRosreestr(address);
 
-    delayProfiler.start("apiRosreestrService.getOksByCadnumbers");
-    //Получение данных из кадастровых номеров и формирование выходного файла
-    Out out = apiRosreestrService.getOksAndLandPlotByCadnumbers(info);
+      delayProfiler.start("apiRosreestrService.getOksByCadnumbers");
+      // Получение данных из кадастровых номеров и формирование выходного файла
+      out = apiRosreestrService.getOksAndLandPlotByCadnumbers(info);
 
-    delayProfiler.stop().print();
+      delayProfiler.stop().print();
+    } else {
+      return ResponseEntity.badRequest().eTag("ServerNotAvailable").build();
+    }
     return out != null ? ResponseEntity.ok(out) : ResponseEntity.notFound().build();
   }
 
   /**
-   * Возвращает статусы серверов
+   * Статусы серверов
    *
-   * @return
+   * @return servers status
    */
   @GetMapping("api/v1/getStatus")
-  ResponseEntity<String> getStatus() {
-    return ResponseEntity.ok(Server.getInstance().toString());
+  ResponseEntity<Server> getStatus() {
+    return ResponseEntity.ok(Server.getInstance());
+  }
+
+  private boolean isSecondaryServerWorks() {
+    return Server.getInstance().getSecondaryServerInUse()
+            && Server.getInstance().getSecondaryServerIsAvailable();
+  }
+
+  private boolean isPrimaryServerWorks() {
+    return Server.getInstance().getPrimaryServerInUse()
+            && Server.getInstance().getPrimaryServerIsAvailable();
   }
 }

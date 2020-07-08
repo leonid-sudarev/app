@@ -5,11 +5,11 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.rosreestr.app.Model.DaData;
+import com.rosreestr.app.model.DaData;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-//см. ApiRosreestrDeserializer
+// см. ApiRosreestrDeserializer
 @Slf4j
 public class DaDataDeserializer extends JsonDeserializer<DaData> {
 
@@ -32,11 +32,10 @@ public class DaDataDeserializer extends JsonDeserializer<DaData> {
       daData.setCity_with_type(node.get("city_with_type").asText());
       daData.setStreet(node.get("street").asText());
       daData.setHouse(node.get("house").asText());
-      System.out.println(daData);
+      log.info(String.valueOf(daData));
       return daData;
     } catch (Exception e) {
-      e.printStackTrace();
-      log.warn("noData-NPE");
+      log.warn("noData-NPE "+e.getMessage());
       return null;
     }
   }

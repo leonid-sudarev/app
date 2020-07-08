@@ -5,8 +5,8 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.rosreestr.app.Model.LandPlot;
-import com.rosreestr.app.Utils.Utils;
+import com.rosreestr.app.model.LandPlot;
+import com.rosreestr.app.utils.Utils;
 
 import java.io.IOException;
 //см. ApiRosreestrDeserializer
@@ -19,16 +19,15 @@ public class LandPlotDeserializer extends JsonDeserializer<LandPlot> {
     try {
       node = oc.readTree(jp);
     } catch (IOException e) {
-      e.printStackTrace();
       return null;
     }
-    JsonNode featureAttrs = node.get("feature");
+    JsonNode featureAttrs = node.get("feature").get("attrs");
     try {
       return new LandPlot(
-          featureAttrs.get("attrs").get("id").asText(),
-          featureAttrs.get("attrs").get("address").asText(),
-          Utils.getMeasureUnitFromIntValue(featureAttrs.get("attrs").get("cad_unit").asInt()),
-          featureAttrs.get("attrs").get("cad_cost").asInt());
+          featureAttrs.get("id").asText(),
+          featureAttrs.get("address").asText(),
+          Utils.getMeasureUnitFromIntValue(featureAttrs.get("cad_unit").asInt()),
+          featureAttrs.get("cad_cost").asInt());
     } catch (Exception e) {
       return null;
     }

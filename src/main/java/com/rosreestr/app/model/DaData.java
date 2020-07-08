@@ -1,4 +1,4 @@
-package com.rosreestr.app.Model;
+package com.rosreestr.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
@@ -16,17 +16,6 @@ public class DaData implements Serializable {
   String street;
   String house;
   String result;
-
-  //  @Override
-  //  public String toString() {
-  //    final StringBuffer sb = new StringBuffer();
-  //    sb.append(region).append(' ');
-  //    sb.append(region_type_full).append(", ");
-  //    sb.append(city_with_type).append(", ");
-  //    sb.append(street).append(", ");
-  //    sb.append(house);
-  //    return sb.toString();
-  //  }
 
   @Override
   public String toString() {

@@ -2,8 +2,8 @@ package com.rosreestr.app.desrializerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.rosreestr.app.Model.Oks;
 import com.rosreestr.app.deserialize.OksDeserializer;
+import com.rosreestr.app.model.Oks;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -3,15 +3,15 @@ package com.rosreestr.app.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.rosreestr.app.Model.LandPlot;
 import com.rosreestr.app.deserialize.LandPlotDeserializer;
+import com.rosreestr.app.model.LandPlot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class LandPlotService {
-  private RestService restService;
+  private final RestService restService;
 
   public LandPlotService(RestService restService) {
     this.restService = restService;
@@ -30,17 +30,10 @@ public class LandPlotService {
               restService.getPlainJson("https://pkk.rosreestr.ru/api/features/1/" + cadNum),
               LandPlot.class);
     } catch (JsonProcessingException e) {
-      e.printStackTrace();
-      log.warn("JsonProcessingException");
+      log.error("JsonProcessingException");
       return null;
     }
     log.debug("deser landPlotMapper " + landPlot);
     return landPlot;
-  }
-
-  public LandPlot getLandPlotApirosreestr(String cadNum) {
-    // LandPlotMapper
-    // FIXME: 7/3/20
-    return new LandPlot();
   }
 }

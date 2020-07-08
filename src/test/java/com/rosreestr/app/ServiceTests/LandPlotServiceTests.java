@@ -1,6 +1,6 @@
 package com.rosreestr.app.ServiceTests;
 
-import com.rosreestr.app.Model.LandPlot;
+import com.rosreestr.app.model.LandPlot;
 import com.rosreestr.app.services.LandPlotService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

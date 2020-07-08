@@ -1,4 +1,4 @@
-package com.rosreestr.app.Utils;
+package com.rosreestr.app.utils;
 
 public class Utils {
   public static String getMeasureUnitFromIntValue(int i) {

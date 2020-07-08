@@ -2,8 +2,8 @@ package com.rosreestr.app.desrializerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.rosreestr.app.Model.DaData;
 import com.rosreestr.app.deserialize.DaDataSecondDeserializer;
+import com.rosreestr.app.model.DaData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

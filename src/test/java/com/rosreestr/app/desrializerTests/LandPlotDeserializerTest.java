@@ -2,8 +2,8 @@ package com.rosreestr.app.desrializerTests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.rosreestr.app.Model.LandPlot;
 import com.rosreestr.app.deserialize.LandPlotDeserializer;
+import com.rosreestr.app.model.LandPlot;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -3,12 +3,12 @@ package com.rosreestr.app.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.rosreestr.app.Model.ApiRosreestr;
-import com.rosreestr.app.Model.LandPlot;
-import com.rosreestr.app.Model.Oks;
-import com.rosreestr.app.Model.Server;
-import com.rosreestr.app.Serealize.Out;
 import com.rosreestr.app.deserialize.ApiRosreestrDeserializer;
+import com.rosreestr.app.model.ApiRosreestr;
+import com.rosreestr.app.model.LandPlot;
+import com.rosreestr.app.model.Oks;
+import com.rosreestr.app.model.Server;
+import com.rosreestr.app.serialize.Out;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.profiler.Profiler;
@@ -21,11 +21,10 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class ApiRosreestrService {
-  private DaDataService daDataService;
-  private RestService restService;
-  private OksService oksService;
-  private LandPlotService landPlotService;
-
+  private final DaDataService daDataService;
+  private final RestService restService;
+  private final OksService oksService;
+  private final LandPlotService landPlotService;
 
   public ApiRosreestr getApiRosreestr(String address) {
     ObjectMapper mapper = getObjectMapper();
@@ -48,7 +47,7 @@ public class ApiRosreestrService {
     try {
       readValue = mapper.readValue(postApiRosreestr, ApiRosreestr.class);
     } catch (JsonProcessingException e) {
-      e.printStackTrace();
+     log.error(e.getMessage());
       return null;
     }
     // Вывод результата профилирования в консоль
@@ -69,19 +68,30 @@ public class ApiRosreestrService {
     for (int i = 0; i < apiRosreestr.getFound(); i++) {
       String cadnomer = apiRosreestr.getObjectsList().get(i).getCADNOMER();
       log.info(cadnomer);
-       oks = Server.getInstance().getMainServerInUse()? oksService.getOksRosreestr(cadnomer):getOks(cadnomer);
+      // чекаем номер  как ОКС объект и если он null (не находим) то смотрим В участках
+      oks =
+          Server.getInstance().getPrimaryServerInUse()
+              ? oksService.getOksRosreestr(cadnomer)
+              : getOks(cadnomer);
       if (oks != null) {
         oksList.add(oks);
         continue;
       }
-      landPlot = Server.getInstance().getMainServerInUse()? landPlotService.getLandPlotRosreestr(cadnomer):getLandplot(cadnomer);
+      landPlot =
+          Server.getInstance().getPrimaryServerInUse()
+              ? landPlotService.getLandPlotRosreestr(cadnomer)
+              : getLandplot(cadnomer);
       if (landPlot != null) {
         landPlotList.add(landPlot);
       }
     }
     // Собираем объект для пользователя
+    if (oksList.isEmpty() && landPlotList.isEmpty()) {
+      return null;
+    }
     out.setOksList(oksList);
     out.setLandPlotList(landPlotList);
+    log.warn(String.valueOf(out));
     return out;
   }
 
@@ -101,7 +111,6 @@ public class ApiRosreestrService {
     try {
       readValue = mapper.readValue(postApiRosreestr, ApiRosreestr.class);
     } catch (JsonProcessingException e) {
-      e.printStackTrace();
       log.error("Парсим JSON в ApiRosreestr" + e.getMessage());
       return null;
     }
@@ -111,9 +120,8 @@ public class ApiRosreestrService {
     return readValue;
   }
 
-
   public Oks getOks(String cadNum) {
-    //Переиспользуем код
+    // Переиспользуем код
     ApiRosreestr oksFromApiRosreestr = getDataFromApiRosreestr(cadNum);
     return getOks(oksFromApiRosreestr);
   }

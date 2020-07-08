@@ -1,7 +1,7 @@
-package com.rosreestr.app.Serealize;
+package com.rosreestr.app.serialize;
 
-import com.rosreestr.app.Model.LandPlot;
-import com.rosreestr.app.Model.Oks;
+import com.rosreestr.app.model.LandPlot;
+import com.rosreestr.app.model.Oks;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

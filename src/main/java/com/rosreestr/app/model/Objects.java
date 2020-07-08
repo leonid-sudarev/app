@@ -1,4 +1,4 @@
-package com.rosreestr.app.Model;
+package com.rosreestr.app.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
